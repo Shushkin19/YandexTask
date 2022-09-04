@@ -16,8 +16,8 @@ struct pers {
 	int sum_diff_char();
 	int sum_day_month();
 	int all_sum_hex();
+	~pers();
 };
-
 
 
 const vector<string> explode(const string& s, const char& c)
@@ -56,9 +56,7 @@ int pers::sum_diff_char() {
 
 	ch = name[0] + name[1] + name[2];
 	int result = 0;
-	/*for (const char c : ch) {
-		result += ch.find(c) != string::npos;
-	}*/
+	
 	
 	int cnt = 0;
 	for (int i = 0; i < ch.length(); i++) {
@@ -107,6 +105,11 @@ int pers::all_sum_hex() {
 	return result;
 }
 
+pers::~pers() {
+	name.clear();
+	ch.clear();
+}
+
 int main() {
 	pers p;
 	int N;
@@ -122,6 +125,7 @@ int main() {
 		hx << hex << p.all_sum_hex();
 		vchx.push_back(hx.str());
 		vchx[u].erase(vchx[u].begin(), vchx[u].end() - 3);
+		p.~pers();
 	}
 
 	for (int i = 0; i < N; i++) {
